@@ -1,0 +1,15 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP:Authorization} .
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+  # Keep application internals inaccessible from the document root.
+  RewriteRule ^(config|database|includes|storage)(/|$) - [F,L,NC]
+  RewriteRule (^|/)\. - [F,L]
+</IfModule>
+
+<FilesMatch "^(\.env|.*\.(ini|log|sql|bak|old))$">
+  Require all denied
+</FilesMatch>
