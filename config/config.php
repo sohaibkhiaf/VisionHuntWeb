@@ -66,6 +66,7 @@ function detect_base_url(): string
 }
 
 define('APP_ENV', getenv('APP_ENV') ?: 'development');
+define('STYLE_VERSION', getenv('STYLE_VERSION') ?: '2.0.0');
 define('BASE_URL', detect_base_url());
 define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
 define('DB_PORT', getenv('DB_PORT') ?: '3306');
@@ -76,6 +77,7 @@ define('APK_FILE', PUBLIC_ROOT . '/assets/apk/VisionHunt.apk');
 
 // The following lines are commented out to allow for easy switching between development and production environments. Uncomment and adjust as needed for your deployment setup.
 // define('APP_ENV', getenv('APP_ENV') ?: 'production');
+// define('STYLE_VERSION', getenv('STYLE_VERSION') ?: '2.0.0');
 // define('BASE_URL', detect_base_url());
 // define('DB_HOST', getenv('DB_HOST') ?: '127.0.0.1');
 // define('DB_PORT', getenv('DB_PORT') ?: '3306');

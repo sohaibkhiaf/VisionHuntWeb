@@ -43,9 +43,13 @@ require APP_ROOT . '/includes/header.php';
   <div class="table-scroll"><table>
     <thead><tr><th class="rank-col">الترتيب</th><th>اسم المستخدم</th><th>النقاط</th><th>آخر تحديث</th></tr></thead>
     <tbody>
-    <?php foreach ($players as $index => $player): $rank = $offset + $index + 1; ?>
-      <tr>
-        <td><span class="rank <?= $rank <= 3 ? 'rank-top' : '' ?>"><?= $rank ?></span></td>
+    <?php foreach ($players as $index => $player):
+      $rank = $offset + $index + 1;
+      $rankClass = $rank <= 3 ? 'rank-top rank-' . $rank : '';
+      $rowClass = $rank <= 3 ? ' class="podium-row podium-' . $rank . '"' : '';
+    ?>
+      <tr<?= $rowClass ?>>
+        <td><span class="rank <?= $rankClass ?>"><?= $rank ?></span></td>
         <td><div class="player-cell"><span class="avatar"><?= e(strtoupper(substr($player['username'], 0, 1))) ?></span><strong><?= e($player['username']) ?></strong></div></td>
         <td><span class="score-pill"><?= e(format_score($player['score'])) ?></span></td>
         <td class="muted nowrap"><?= e(format_datetime($player['updated_at'])) ?></td>

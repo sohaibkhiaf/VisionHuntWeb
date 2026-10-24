@@ -68,9 +68,9 @@ require APP_ROOT . '/includes/header.php';
         <?php endif; ?>
         <?php foreach ($players as $i => $p): ?>
           <tr>
-            <td class="muted"><?= $offset + $i + 1 ?></td>
-            <td><strong><?= e($p['username']) ?></strong></td>
-            <td><?= e($p['phone'] ?: '—') ?></td>
+            <td><span class="rank"><?= $offset + $i + 1 ?></span></td>
+            <td><div class="player-cell"><span class="avatar"><?= e(strtoupper(substr($p['username'], 0, 1))) ?></span><strong><?= e($p['username']) ?></strong></div></td>
+            <td class="nowrap"><?= e($p['phone'] ?: '—') ?></td>
             <td><span class="score-pill"><?= e(format_score($p['score'])) ?></span></td>
             <td class="muted nowrap"><?= e(format_datetime($p['updated_at'])) ?></td>
             <td><a class="button button-small button-secondary" href="<?= e(url('/admin/player.php?id=' . (int)$p['id'])) ?>">تفاصيل</a></td>

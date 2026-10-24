@@ -23,26 +23,29 @@ $navClass = static fn(string $key): string => $activeNav === $key ? ' class="act
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="لوحة ترتيب لاعبي Vision Hunt">
   <title><?= e($pageTitle) ?> | Vision Hunt</title>
-  <link rel="icon" type="image/png" href="<?= e(url('/assets/images/logo.png')) ?>">
-  <link rel="icon" type="image/png" href="<?= e(url('/assets/images/logo.png')) ?>">
-  <link rel="icon" type="image/png" href="<?= e(url('/assets/images/logo.png')) ?>">
-  <link rel="stylesheet" href="<?= e(url('/assets/css/style.css')) ?>">
-  <link rel="stylesheet" href="<?= e(url('/assets/css/events.css')) ?>">
+<?php $assetVer = '?v=' . rawurlencode((string)(defined('STYLE_VERSION') ? STYLE_VERSION : '1.0.0')); ?>
+  <link rel="icon" type="image/png" href="<?= e(url('/assets/images/logo.png') . $assetVer) ?>">
+  <link rel="stylesheet" href="<?= e(url('/assets/css/style.css') . $assetVer) ?>">
+  <link rel="stylesheet" href="<?= e(url('/assets/css/events.css') . $assetVer) ?>">
+  <style>:root { --hero-bg-image: url("<?= e(url('/assets/images/background.webp') . $assetVer) ?>"); }</style>
 </head>
 <body>
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="<?= e(url('/')) ?>"><img class="brand-logo" src="<?= e(url('/assets/images/logo.png')) ?>" alt=""><span>Vision <b>Hunt</b></span></a>
+    <a class="brand" href="<?= e(url('/')) ?>">
+      <span class="brand-logo-wrap"><img class="brand-logo" src="<?= e(url('/assets/images/logo.png') . $assetVer) ?>" alt=""></span>
+      <span class="brand-text" dir="ltr">Vision <b>Hunt</b></span>
+    </a>
     <nav class="main-nav" aria-label="التنقل الرئيسي">
-      <a<?= $navClass('home') ?> href="<?= e(url('/')) ?>">الترتيب</a>
-      <a<?= $navClass('events') ?> href="<?= e(url('/events.php')) ?>">الأحداث</a>
+      <a<?= $navClass('home') ?> href="<?= e(url('/')) ?>"><span class="nav-icon" aria-hidden="true">🏆</span> الترتيب</a>
+      <a<?= $navClass('events') ?> href="<?= e(url('/events.php')) ?>"><span class="nav-icon" aria-hidden="true">⚡</span> الأحداث</a>
       <?php if (admin_logged_in()): ?>
-        <a<?= $navClass('dashboard') ?> href="<?= e(url('/admin/dashboard.php')) ?>">لوحة الإدارة</a>
-        <a<?= $navClass('admin-events') ?> href="<?= e(url('/admin/events.php')) ?>">إدارة الأحداث</a>
-        <a<?= $navClass('players') ?> href="<?= e(url('/admin/players.php')) ?>">اللاعبون</a>
-        <form class="nav-inline" action="<?= e(url('/admin/logout.php')) ?>" method="post" onsubmit="return confirm('هل أنت متأكد من تسجيل الخروج؟');"><?= csrf_field() ?><button class="nav-link" type="submit">خروج</button></form>
+        <a<?= $navClass('dashboard') ?> href="<?= e(url('/admin/dashboard.php')) ?>"><span class="nav-icon" aria-hidden="true">🎮</span> لوحة الإدارة</a>
+        <a<?= $navClass('admin-events') ?> href="<?= e(url('/admin/events.php')) ?>"><span class="nav-icon" aria-hidden="true">🎯</span> إدارة الأحداث</a>
+        <a<?= $navClass('players') ?> href="<?= e(url('/admin/players.php')) ?>"><span class="nav-icon" aria-hidden="true">👥</span> اللاعبون</a>
+        <form class="nav-inline" action="<?= e(url('/admin/logout.php')) ?>" method="post" onsubmit="return confirm('هل أنت متأكد من تسجيل الخروج؟');"><?= csrf_field() ?><button class="nav-link nav-logout" type="submit">خروج</button></form>
       <?php else: ?>
-        <a<?= $navClass('admin-login') ?> href="<?= e(url('/admin/login.php')) ?>">دخول المشرف</a>
+        <a<?= $navClass('admin-login') ?> href="<?= e(url('/admin/login.php')) ?>"><span class="nav-icon" aria-hidden="true">🛡️</span> دخول المشرف</a>
       <?php endif; ?>
     </nav>
   </div>

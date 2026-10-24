@@ -50,9 +50,9 @@ function rarity_label(string $r): string {
 }
 function rarity_class(string $r): string {
     return match(strtoupper($r)) {
-        'COMMON'   => 'confidence-high',
-        'UNCOMMON' => 'confidence-mid',
-        'RARE'     => 'confidence-low',
+        'COMMON'   => 'confidence-high rarity-common',
+        'UNCOMMON' => 'confidence-mid rarity-uncommon',
+        'RARE'     => 'confidence-low rarity-rare',
         default    => '',
     };
 }
@@ -94,18 +94,18 @@ require APP_ROOT . '/includes/header.php';
 
 <?php if ($tasks): ?>
 <!-- Rarity statistics. -->
-<div class="stats-grid" style="margin-top:22px">
-  <article class="stat-card">
+<div class="stats-grid card-spacing">
+  <article class="stat-card rarity-card-common">
     <span class="stat-icon">◎</span>
     <span class="muted">شائع (<?= $rarityCount['COMMON'] * 10 ?> نقطة)</span>
     <strong><?= number_format($rarityCount['COMMON']) ?></strong>
   </article>
-  <article class="stat-card">
+  <article class="stat-card rarity-card-uncommon">
     <span class="stat-icon">◈</span>
     <span class="muted">غير شائع (<?= $rarityCount['UNCOMMON'] * 20 ?> نقطة)</span>
     <strong><?= number_format($rarityCount['UNCOMMON']) ?></strong>
   </article>
-  <article class="stat-card">
+  <article class="stat-card rarity-card-rare">
     <span class="stat-icon">✦</span>
     <span class="muted">نادر (<?= $rarityCount['RARE'] * 30 ?> نقطة)</span>
     <strong><?= number_format($rarityCount['RARE']) ?></strong>
@@ -147,10 +147,10 @@ require APP_ROOT . '/includes/header.php';
             $conf = (float)$task['confidence'];
           ?>
             <tr>
-              <td class="muted"><?= $idx + 1 ?></td>
+              <td><span class="rank"><?= $idx + 1 ?></span></td>
               <td>
                 <strong><?= e($task['object_name_ar']) ?></strong>
-                <br><small class="muted" style="font-size:11px;direction:ltr"><?= e($task['object_name_en']) ?></small>
+                <span class="object-en-sub"><?= e($task['object_name_en']) ?></span>
               </td>
               <td>
                 <span class="confidence <?= rarity_class($task['rarity']) ?>">
