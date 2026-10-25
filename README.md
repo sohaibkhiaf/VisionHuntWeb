@@ -41,6 +41,34 @@ Content-Type: application/json
 | `POST` | `/complete_task.php` | Bearer | تسجيل مهمة واحدة |
 | `POST` | `/restart.php` | Bearer | حذف مهام اللاعب وإعادة النقاط للصفر |
 | `GET` | `/current_event.php` | لا | جلب الحدث الجاري أو القادم وآخر حدث منتهٍ |
+| `GET` | `/app_version.php` | لا | التحقق من إصدار التطبيق وتوفر تحديث ورابط تحميل APK المباشر |
+
+## فحص إصدار التطبيق والتحديثات — `GET /app_version.php`
+
+لا يحتاج هذا المسار إلى مصادقة. يعيد رقم الإصدار الحالي المعرّف في `APP_VERSION` داخل `config/config.php`، وحالة توفر ملف الـ APK، وحجمه بالبايت، ورابط التحميل المباشر (`download_url`) ليتمكن التطبيق من تنزيل التحديث مباشرةً.
+
+يمكن للتطبيق إرسال إصداره الحالي اختياريًا عبر المعامل `current_version` (أو `version`) ليقوم الخادم بمقارنته وإرجاع نتيجة `update_available` (`true` إذا كان إصدار الخادم أحدث من إصدار التطبيق وملف APK متوفرًا).
+
+```http
+GET /api/v1/app_version.php?current_version=1.0.0
+```
+
+نجاح — `200 OK`:
+
+```json
+{
+  "success": true,
+  "message": "يتوفر إصدار جديد من التطبيق للتحميل.",
+  "data": {
+    "version": "1.1.0",
+    "current_version": "1.0.0",
+    "update_available": true,
+    "apk_available": true,
+    "apk_size": 15420390,
+    "download_url": "http://localhost/visionhunt/download_apk.php?v=1.1.0"
+  }
+}
+```
 
 ## فحص الاتصال — `GET /health.php`
 

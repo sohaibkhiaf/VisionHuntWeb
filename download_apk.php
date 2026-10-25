@@ -17,9 +17,19 @@ if (!is_file(APK_FILE) || !is_readable(APK_FILE)) {
     exit;
 }
 
+while (ob_get_level() > 0) {
+    ob_end_clean();
+}
+
+$versionSuffix = defined('APP_VERSION') && trim((string)APP_VERSION) !== ''
+    ? '-' . preg_replace('/[^A-Za-z0-9._-]/', '', (string)APP_VERSION)
+    : '';
+
 header('Content-Type: application/vnd.android.package-archive');
-header('Content-Disposition: attachment; filename="VisionHunt.apk"');
+header('Content-Disposition: attachment; filename="VisionHunt' . $versionSuffix . '.apk"');
 header('Content-Length: ' . filesize(APK_FILE));
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
 header('X-Content-Type-Options: nosniff');
 readfile(APK_FILE);
 exit;

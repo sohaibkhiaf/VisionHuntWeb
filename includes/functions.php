@@ -227,7 +227,7 @@ function finish_event(int $eventId): bool
         foreach ($players as $index => $player) $insert->execute([$eventId, $index + 1, $player['username'], (string)$player['score']]);
         $pdo->exec('DELETE FROM completed_tasks');
         $pdo->exec('UPDATE players SET score = 0, updated_at = NOW() WHERE score <> 0');
-        $pdo->prepare('UPDATE events SET processed_at = ? WHERE id = ?')->execute([$now, $eventId]);
+        $pdo->prepare('UPDATE events SET processed_at = ?, ends_at = CASE WHEN ends_at > ? THEN ? ELSE ends_at END WHERE id = ?')->execute([$now, $now, $now, $eventId]);
         $pdo->commit();
         return true;
     } catch (Throwable $ex) {

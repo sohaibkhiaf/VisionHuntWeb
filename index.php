@@ -19,7 +19,7 @@ require APP_ROOT . '/includes/header.php';
 ?>
 <section class="hero leaderboard-hero">
   <div class="hero-copy"><span class="eyebrow">VISION HUNT · LEADERBOARD</span><h1>اكتشف الأشياء وتصدر القائمة!</h1><p>تابع ترتيب اللاعبين حسب مجموع النقاط المسجّلة في اللعبة.</p>
-    <a class="button button-light" href="<?= e(url('/download_apk.php')) ?>"><span aria-hidden="true">↓</span> تحميل تطبيق Vision Hunt APK</a>
+    <a class="button button-light" href="<?= e(url('/download_apk.php') . '?v=' . rawurlencode((string)(defined('APP_VERSION') ? APP_VERSION : '1.0.0'))) ?>"><span aria-hidden="true">↓</span> تحميل تطبيق Vision Hunt APK</a>
   </div>
   <div class="hero-stat"><span>عدد اللاعبين</span><strong><?= number_format($total) ?></strong></div>
 </section>
