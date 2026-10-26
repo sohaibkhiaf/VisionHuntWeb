@@ -331,7 +331,7 @@ Authorization: Bearer <token>
 ```json
 {
   "success": true,
-  "message": "تم تسجيل الخروج وإبطال رمز الوصول الحالي"
+  "message": "تم تسجيل الخروج بنجاح"
 }
 ```
 

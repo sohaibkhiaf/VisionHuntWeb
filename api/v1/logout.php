@@ -11,4 +11,4 @@ if (!preg_match('/^Bearer\s+([a-f0-9]{64})$/i', trim($header), $matches)) {
     api_json(['success'=>false,'message'=>'رمز الوصول غير صالح.'], 401);
 }
 db()->prepare('DELETE FROM api_tokens WHERE player_id=? AND token_hash=?')->execute([(int)$player['id'], hash('sha256', $matches[1])]);
-api_json(['success'=>true,'message'=>'تم تسجيل الخروج وإبطال رمز الوصول الحالي.']);
+api_json(['success'=>true,'message'=>'تم تسجيل الخروج بنجاح.']);
