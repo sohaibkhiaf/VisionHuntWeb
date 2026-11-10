@@ -1,0 +1,3 @@
+/config/config.local.php
+/assets/apk/*.apk
+.env
